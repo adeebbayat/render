@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from playwright.sync_api import sync_playwright
 
@@ -8,8 +9,10 @@ app = Flask(__name__)
 @app.route("/busyness")
 def busyness():
     with sync_playwright() as p:
+        chromium_path = "/opt/render/.cache/ms-playwright/chromium-1187/chrome-linux/chrome"
         browser = p.chromium.launch(
             headless=True,
+            executable_path=chromium_path,
             args=["--no-sandbox", "--disable-dev-shm-usage"]
         )
         page = browser.new_page()
