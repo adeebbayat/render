@@ -5,6 +5,10 @@ URL = "https://www.google.com/maps/place/JOHN+REED+Fitness/@34.0179334,-118.5018
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return jsonify({"status": "ok", "message": "Gym busyness API is running."})
+
 @app.route("/busyness")
 def busyness():
     with sync_playwright() as p:
